@@ -14,26 +14,42 @@ use Illuminate\Support\Facades\Route;
 */
 //
 //Route::get('/user', 'UserController@index');
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 
-Route::get('/admin/view', 'adminController\viewController@index');
-Route::get('/admin/add', 'adminController\addController@index');
-Route::post('/admin/addVendor', 'adminController\addController@addVendor');
-Route::post('/admin/getProduct', 'adminController\addController@getProduct');
-Route::post('/admin/addItems', 'adminController\addController@addItems');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/admin/view', 'adminController\viewController@index')->name("admin_view");
+    Route::get('/admin/add', 'adminController\addController@index')->name("admin_add");
+    Route::post('/admin/addVendor', 'adminController\addController@addVendor');
+    Route::post('/admin/getProduct', 'adminController\addController@getProduct');
+    Route::post('/admin/addItems', 'adminController\addController@addItems');
+});
 
 
+//Route::get('/admin/view', 'adminController\viewController@index')->name("admin_view");
+//Route::get('/admin/add', 'adminController\addController@index');
+//Route::post('/admin/addVendor', 'adminController\addController@addVendor');
+//Route::post('/admin/getProduct', 'adminController\addController@getProduct');
+//Route::post('/admin/addItems', 'adminController\addController@addItems');
 
-Route::get('/sales/view', 'salesController\stockoutController@index');
-Route::post('/sales/addCustomer', 'salesController\stockoutController@addCustomer');
-Route::post('/sales/getItem', 'salesController\stockoutController@getItem');
-Route::post('/sales/stockOut', 'salesController\stockoutController@stockOut');
+
+Route::group(['middleware' => ['auth', 'sales']], function () {
+    Route::get('/sales/view', 'salesController\stockoutController@index')->name("sales_view");
+    Route::post('/sales/addCustomer', 'salesController\stockoutController@addCustomer');
+    Route::post('/sales/getItem', 'salesController\stockoutController@getItem');
+    Route::post('/sales/stockOut', 'salesController\stockoutController@stockOut');
+});
+
+
+//Route::get('/sales/view', 'salesController\stockoutController@index')->name("sales_view");
+//Route::post('/sales/addCustomer', 'salesController\stockoutController@addCustomer');
+//Route::post('/sales/getItem', 'salesController\stockoutController@getItem');
+//Route::post('/sales/stockOut', 'salesController\stockoutController@stockOut');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 

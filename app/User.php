@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use \Illuminate\Auth\Authenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -37,15 +38,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-//while inserting
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
-//while getting
-    public function getNameAttribute($name)
-    {
-        return ucfirst($name);
-    }
 }
