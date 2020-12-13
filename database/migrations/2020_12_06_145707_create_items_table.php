@@ -15,16 +15,13 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('itemCode')->unique();
-            $table->string('itemDsc');
+            $table->string('itemCode')->nullable();
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->boolean('in_stock');
             $table->timestamp('stock_out_date')->nullable();
             $table->bigInteger('customer')->nullable();
             $table->string('customer_name')->nullable();
             $table->timestamps();
-
         });
     }
 

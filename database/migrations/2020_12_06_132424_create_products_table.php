@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('productCode')->unique();
             $table->string('productDsc');
             $table->bigInteger('vendor_id')->unsigned();
+            $table->integer('qty')->nullable();
+            $table->float('unit_price')->nullable();
             $table->timestamps();
             $table->foreign('vendor_id')->references('id')->on('vendors');
         });

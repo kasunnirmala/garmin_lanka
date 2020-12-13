@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/admin/addVendor', 'adminController\addController@addVendor');
     Route::post('/admin/getProduct', 'adminController\addController@getProduct');
     Route::post('/admin/addItems', 'adminController\addController@addItems');
+    Route::post('/admin/addProducts', 'adminController\addController@addProducts');
 });
 
 

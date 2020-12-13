@@ -17,7 +17,7 @@ class addController extends Controller
 
 
         $vendors = Vendor::all();
-        return view('admin.add', [
+        return view('admin.add_product', [
             'vendors' => $vendors
         ]);
     }
@@ -59,5 +59,43 @@ class addController extends Controller
         ]);
 
     }
+
+
+    public function addProducts(Request $request)
+    {
+        $data = $request->input();
+        $vendor_id = $data['data']['vendor_id'];
+        if ($vendor_id) {
+            $productList = $data['data']['productList'];
+            foreach ($productList as $product) {
+
+                if (isset($product['product_code'])) {
+                    $thisproduct = Product::where('productCode', '=', $product['product_code'])->first();
+                    if (!isset($thisproduct)) {
+                        Product::create([
+                            'productCode' => $product['product_code'],
+                            'productDsc' => $product['product_desc'],
+                            'vendor_id' => $vendor_id,
+                            'qty' => $product['qty'],
+                            'unit_price' => $product['unit_price'],
+                        ]);
+                    } else {
+                        $thisproduct->update(array('qty' => $thisproduct->qty + $product['qty'], 'unit_price' => $product['unit_price']));
+                    }
+                }
+            }
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 202,
+            'message' => 'No Real Vendor'
+        ]);
+    }
+
 
 }
