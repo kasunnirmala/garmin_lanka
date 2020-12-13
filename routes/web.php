@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,7 +50,8 @@ Route::group(['middleware' => ['auth', 'sales']], function () {
 //Route::post('/sales/stockOut', 'salesController\stockoutController@stockOut');
 
 
-Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
-
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
