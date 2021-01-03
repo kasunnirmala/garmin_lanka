@@ -19,6 +19,7 @@ class viewController extends Controller
         foreach ($products as $product) {
             $vendor = Vendor::where('id', '=', $product->vendor_id)->first();
             $data = new \stdClass();
+            $data->productID = $product->id;
             $data->vendorName = $vendor->vendor_name;
             $data->garminId = $product->productCode;
             $data->productDesc = $product->productDsc;

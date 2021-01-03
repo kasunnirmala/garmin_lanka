@@ -21,8 +21,6 @@
                 <th scope="col">Garmin ID</th>
                 <th scope="col">product Desc</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Unit Price</th>
-                <th scope="col">Last Updated</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -34,12 +32,12 @@
                     <td>{{$product->garminId}}</td>
                     <td>{{$product->productDesc}}</td>
                     <td>{{$product->qty}}</td>
-                    <td>{{$product->unit_price}}</td>
-                    <td>{{$product->lastUpdated}}</td>
+
                     <td>
                         <button class="btn btn-sm btn-success action-btn" data-toggle="modal"
-                                data-target="#add-product-amount" data-product-id="{{$product->productID}}">
-                            ADD
+                                data-target="#add-product-amount" data-product-id="{{$product->productID}}"
+                                data-max="{{$product->qty}}">
+                            SALE-OUT
                         </button>
                     </td>
                 </tr>
@@ -65,7 +63,8 @@
                             <input type="number" class="form-control" id="product-amount" name="Amount">
                         </div>
 
-                        <button class="btn btn-sm btn-success" id="btn-add-product-amount">ADD</button>
+
+                        <button class="btn btn-sm btn-success" id="btn-add-product-amount">OUT</button>
 
                     </div>
 
@@ -84,37 +83,23 @@
         $(document).ready(function () {
             $('#allstock').DataTable();
         });
-$("#add-product-amount").on('show.bs.modal',function (event) {
-let product_id=$(event.relatedTarget).data('product-id');
-$(this).find('#product-id').val(product_id);
-})
+        $("#add-product-amount").on('show.bs.modal', function (event) {
+            let product_id = $(event.relatedTarget).data('product-id');
+            let max = $(event.relatedTarget).data('max');
+            $(this).find('#product-id').val(product_id);
+            $(this).find('#product-amount').attr({"max": max, "min": 1});
+        })
 
 
         $("#btn-add-product-amount").on('click', function () {
-            // alert($("#product-id").val());
-            var id = $("#product-id").val();
-            var amount = $("#product-amount").val();
-            $.ajax({
-                url: "updateProducts",
-                data: {"_token": "{{ csrf_token() }}", 'data': {'product_id':id, 'amount': amount}},
-                method: 'POST',
-                beforeSend: function () {
-                    $.LoadingOverlay("show");
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data['status'] == 200) {
-                        $.notify("Stock Saved Successfully", "success");
-                        location.reload();
-                    } else {
-                        $.notify("Error in saving...", "error");
-                    }
+            if($('#product-amount')[0].checkValidity()){
+                var id = $("#product-id").val();
+                var amount = $("#product-amount").val();
+                window.location.href = '/sales/out?id=' + id + '&amount=' + amount;
+            }else{
+                $.notify("Please Enter Valid Amount", "error");
+            }
 
-                },
-                complete: function () {
-                    $.LoadingOverlay("hide");
-                }
-            });
 
 
         });

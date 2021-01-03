@@ -98,4 +98,33 @@ class addController extends Controller
     }
 
 
+    public function updateProductAmount(Request $request)
+    {
+        $data = $request->input();
+        $product_id = $data['data']['product_id'];
+        $amount = $data['data']['amount'];
+        if ($product_id) {
+            $thisproduct = Product::find(intval($product_id));
+//            return response()->json([
+//                'status' => 205,
+//                'message' => $product_id
+//            ]);
+
+            if (isset($thisproduct)) {
+                $thisproduct->update(array('qty' => $thisproduct->qty + $amount));
+            }
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 202,
+            'message' => "ERROR"
+        ]);
+    }
+
+
 }

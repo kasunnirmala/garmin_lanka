@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/admin/getProduct', 'adminController\addController@getProduct');
     Route::post('/admin/addItems', 'adminController\addController@addItems');
     Route::post('/admin/addProducts', 'adminController\addController@addProducts');
+    Route::post('/admin/updateProducts', 'adminController\addController@updateProductAmount');
 });
 
 
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
 Route::group(['middleware' => ['auth', 'sales']], function () {
     Route::get('/sales/view', 'salesController\stockoutController@index')->name("sales_view");
+    Route::get('/sales/out', 'salesController\stockoutController@stockout_index')->name("sales_out");
     Route::post('/sales/addCustomer', 'salesController\stockoutController@addCustomer');
     Route::post('/sales/getItem', 'salesController\stockoutController@getItem');
     Route::post('/sales/stockOut', 'salesController\stockoutController@stockOut');
