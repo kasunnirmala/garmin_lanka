@@ -19,7 +19,7 @@
             <tr>
                 <th scope="col">Vendor Name</th>
                 <th scope="col">Garmin ID</th>
-                <th scope="col">product Desc</th>
+                <th scope="col">Product Desc</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Actions</th>
             </tr>

@@ -19,7 +19,7 @@
                 <tr>
 
                     <th scope="col">Garmin ID</th>
-                    <th scope="col">Item Code</th>
+                    <th scope="col">Serial Number</th>
                     <th scope="col">Customer Name</th>
                     <th scope="col">Stock Out Date</th>
                     <th scope="col">Sales Person</th>
