@@ -16,31 +16,40 @@
 @section('body-content')
     <div class="container-fluid">
         <form id="add-form">
-            <div class="row">
-                <div class="col-lg-10 col-md-8 col-sm-12">
-                    <select class="selectpicker" data-width="100%"
-                            data-live-search="true" title="Select Customer" id="customer" required>
-                        @foreach ($customers as $customer)
-                            <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
-                        @endforeach
-                    </select>
+          <div class="row">
+              <div class="col-md-8 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-10 col-md-8 col-sm-12">
+                        <select class="selectpicker" data-width="100%"
+                                data-live-search="true" title="Select Customer" id="customer" required>
+                            @foreach ($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-sm-12 d-flex justify-content-end">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                data-target="#add-new-customer">
+                            <i class="fas fa-plus-circle"></i> ADD NEW
+                        </button>
+                    </div>
+
+
                 </div>
-
-                <div class="col-lg-2 col-md-4 col-sm-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                            data-target="#add-new-customer">
-                        <i class="fas fa-plus-circle"></i> ADD NEW
-                    </button>
-                </div>
-
-
-            </div>
+              </div>
+              <div class="col-md-4 col-sm-12">
+                  <h2>Product Details</h2>
+                  <div>Product Code : {{$product->productCode}}</div>
+                  <div>Product Description : {{$product->productDsc}}</div>
+              </div>
+          </div>
             <br>
 
             <div id="item-list"></div>
 
             <br>
-            <div class="row d-flex justify-content-end">
+            <div class="row d-flex flex-column">
                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
                         data-target="#item-summary">SAVE
                 </button>
@@ -74,6 +83,9 @@
                             <textarea type="text" class="form-control" id="customer_address" rows="3"
                                       name="customer_address"></textarea>
                         </div>
+
+                        <input type="hidden" name="id" value="{{$id}}">
+                        <input type="hidden" name="amount" value="{{$amount}}">
                         <button class="btn btn-sm btn-success" type="submit">ADD</button>
                     </form>
                 </div>
@@ -95,7 +107,12 @@
                 </div>
                 <div class="modal-body">
 
+                    <div class="form-group">
+                        <label for="sales_person">sales person name:</label>
+                        <input type="text" class="form-control" id="sales_person" name="sales_person">
+                    </div>
 
+                 <div class="body-data"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-success" id="confirm-button">CONFIRM</button>
@@ -136,8 +153,8 @@
         });
 
         $("#item-summary").on('show.bs.modal', function (event) {
-            $(this).find('.modal-body').empty();
-            $(this).find('.modal-body').append("<p>Customer :" + $('#customer').text() + "</p><p><u>Item Serial Codes</u></p>");
+            $(this).find('.body-data').empty();
+            $(this).find('.body-data').append("<p>Customer :" + $('#customer').text() + "</p><p><u>Item Serial Codes</u></p>");
 
             var itemList = [];
             rndList.forEach((rnd) => {
@@ -146,7 +163,7 @@
 
                 itemList.push({serial_code: serial_code, serial_description: serial_description})
 
-                $(this).find('.modal-body').append("<div>" + serial_code + "</div>");
+                $(this).find('.body-data').append("<div>" + serial_code + "</div>");
 
             })
 
@@ -212,7 +229,10 @@
 
 
         $('#confirm-button').click(function () {
-            var itemList = [];
+            if($('#sales_person').val()==""){
+                alert("Please Enter a sales name");
+            }else{
+               var itemList = [];
             rndList.forEach((rnd) => {
                 var serial_code = $(`#serial_code${rnd}`).val();
                 var serial_description = $(`#serial_description${rnd}`).val();
@@ -224,7 +244,8 @@
             var items = {
                 customer_id: $('#customer').val(),
                 itemList: itemList,
-                product_id: productID
+                product_id: productID,
+                sales_person:$('#sales_person').val()
             }
             // console.log(items);
             $.ajax({
@@ -237,12 +258,15 @@
                 success: function (data) {
                     console.log(data)
                     window.location.href = '/sales/view';
+                    // window.location.href = '/garmin/public/sales/view';
 
                 },
                 complete: function () {
                     $.LoadingOverlay("hide");
                 }
             });
+            }
+
 
         });
 

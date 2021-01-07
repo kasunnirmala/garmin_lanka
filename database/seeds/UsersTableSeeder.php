@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'sales',
             'email' => 'sales',
-            'password' => Hash::make('123456789'),
+            'password' => Hash::make('123'),
             'role' => '2'
         ]);
 

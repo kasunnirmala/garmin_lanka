@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin/view', 'adminController\viewController@index')->name("admin_view");
+    Route::get('/admin/view/stockouts', 'adminController\viewController@stockouts')->name("admin_view_stockout");
     Route::get('/admin/add', 'adminController\addController@index')->name("admin_add");
     Route::post('/admin/addVendor', 'adminController\addController@addVendor');
     Route::post('/admin/getProduct', 'adminController\addController@getProduct');

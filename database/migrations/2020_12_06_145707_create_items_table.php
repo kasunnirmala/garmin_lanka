@@ -14,6 +14,7 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
+
             $table->id();
             $table->string('itemCode')->nullable();
             $table->bigInteger('product_id')->unsigned();
@@ -21,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->timestamp('stock_out_date')->nullable();
             $table->bigInteger('customer')->nullable();
             $table->string('customer_name')->nullable();
+            $table->string('sales_person')->nullable();
             $table->timestamps();
         });
     }

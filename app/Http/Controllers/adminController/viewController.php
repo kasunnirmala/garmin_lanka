@@ -100,4 +100,22 @@ class viewController extends Controller
     }
 
 
+    public function stockouts(){
+        $items = item::all();
+        $dataSet = [];
+        foreach ($items as $item) {
+            $product = Product::where('id', '=', $item->product_id)->first();
+            $data = new \stdClass();
+            $data->garminId = $product->productCode;
+            $data->itemCode = $item->itemCode;
+            $data->customerName = $item->customer_name;
+            $data->stockOutDate = $item->stock_out_date;
+            $data->salesPerson = $item->sales_person;
+           array_push($dataSet, $data);
+        }
+        return view('admin.view_stockouts', [
+            'data' => $dataSet
+        ]);
+    }
+
 }

@@ -66,8 +66,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Action List</h6>
-                        <a class="collapse-item" href="{{route('admin_view')}}">View All Stock</a>
+                        <a class="collapse-item" href="{{route('admin_view')}}">View All Products</a>
                         <a class="collapse-item" href="{{route('admin_add')}}">Add Stock</a>
+                        <a class="collapse-item" href="{{route('admin_view_stockout')}}">View Stock-outs</a>
                     </div>
                 </div>
             </li>

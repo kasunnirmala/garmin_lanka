@@ -13,14 +13,19 @@ class stockoutController extends Controller
 {
     public function stockout_index()
     {
-//        $item = item::create(['itemCode' => 'qweqwe', 'itemDsc' => 'qqqqqq', 'product_id' => 1, 'in_stock' => true, 'customer' => null, 'customer_name' => null, 'stock_out_date' => null]);
-//        item::where('itemCode', '=', 'asdasd')->first()->update(array('in_stock' => false, 'customer' => 1, 'customer_name' => 'Nimal', 'stock_out_date' => new \DateTime(),));
+        //        $item = item::create(['itemCode' => 'qweqwe', 'itemDsc' => 'qqqqqq', 'product_id' => 1, 'in_stock' => true, 'customer' => null, 'customer_name' => null, 'stock_out_date' => null]);
+        //        item::where('itemCode', '=', 'asdasd')->first()->update(array('in_stock' => false, 'customer' => 1, 'customer_name' => 'Nimal', 'stock_out_date' => new \DateTime(),));
         $customers = Customer::all();
-//        return view('sales.stockout_new', [
-//            'customers' => $customers
-//        ]);
+        $product = Product::where('id', '=', request()->id)->first();
+        //        return view('sales.stockout_new', [
+        //            'customers' => $customers
+        //        ]);
+        // dd($product);
         return view('sales.stockout_withmax', [
-            'customers' => $customers
+            'customers' => $customers,
+            'id' => request()->id,
+            'amount' => request()->amount,
+            'product' => $product
         ]);
     }
 
@@ -51,7 +56,7 @@ class stockoutController extends Controller
     {
         $data = $request->input();
         Customer::create($data);
-        return redirect('/sales/view');
+        return redirect('/sales/out?id=' . $data['id'] . '&amount=' . $data['amount']);
     }
 
 
@@ -67,6 +72,7 @@ class stockoutController extends Controller
     {
         $data = $request->input();
         $customer_id = $data['data']['customer_id'];
+        $sales_person = $data['data']['sales_person'];
         $product_id = $data['data']['product_id'];
         $customer = Customer::where('id', '=', $customer_id)->first();
         $itemList = $data['data']['itemList'];
@@ -81,21 +87,18 @@ class stockoutController extends Controller
                         'product_id' => $product->id,
                         'stock_out_date' => new \DateTime(),
                         'customer' => $customer->id,
-                        'customer_name' => $customer->customer_name
+                        'customer_name' => $customer->customer_name,
+                        'sales_person' => $sales_person
                     ]);
                     $product->update(array('qty' => $product->qty - 1));
                 }
-
             }
-
-
         }
 
         return response()->json([
             'status' => 200,
             'message' => 'success'
         ]);
-
     }
 
 
@@ -108,7 +111,7 @@ class stockoutController extends Controller
         $customer = Customer::where('id', '=', $customer_id)->first();
 
         $itemList = $data['data']['itemList'];
-//        return $customer->id;
+        //        return $customer->id;
 
         foreach ($itemList as $item) {
             if ($item['serial_code']) {
@@ -120,6 +123,5 @@ class stockoutController extends Controller
             'status' => 200,
             'message' => 'success'
         ]);
-
     }
 }
