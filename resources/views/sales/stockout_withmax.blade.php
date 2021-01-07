@@ -257,8 +257,8 @@
                 },
                 success: function (data) {
                     console.log(data)
-                    window.location.href = '/sales/view';
-                    // window.location.href = '/garmin/public/sales/view';
+                    // window.location.href = '/sales/view';
+                    window.location.href = '/garmin/public/sales/view';
 
                 },
                 complete: function () {
