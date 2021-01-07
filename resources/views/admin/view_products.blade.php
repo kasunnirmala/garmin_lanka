@@ -11,7 +11,7 @@
 @endsection
 
 @section('sub-detail')
-    <h1>Total Cost => <span style="font-weight: bolder; color: green">Rs: {{$total}}/=</span></h1>
+    <h1>Total => <span style="font-weight: bolder; color: green">Rs: {{$total}}/=</span></h1>
 @endsection
 
 
