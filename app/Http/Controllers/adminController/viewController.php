@@ -16,6 +16,7 @@ class viewController extends Controller
 
         $products = Product::all();
         $dataSet = [];
+        $total = 0;
         foreach ($products as $product) {
             $vendor = Vendor::where('id', '=', $product->vendor_id)->first();
             $data = new \stdClass();
@@ -26,32 +27,34 @@ class viewController extends Controller
             $data->qty = $product->qty;
             $data->unit_price = $product->unit_price;
             $data->lastUpdated = $product->updated_at;
+            $total += $product->unit_price * $product->qty;
             array_push($dataSet, $data);
         }
-//        foreach ($items as $item) {
-//            $product = Product::where('id', '=', $item->product_id)->first();
-//
-//            if (!isset($dataSet[$product->vendor_id])) {
-//                $vendor = Vendor::where('id', '=', $product->vendor_id)->first();
-//                $dataSet[$product->vendor_id]['vendor'] = $vendor;
-//            }
-//            $dataSet[$product->vendor_id]['products'][$item->product_id]['product'] = $product;
-//
-//
-//            $dataSet[$product->vendor_id]['products'][$item->product_id]['items'][$item->id] = $item;
-//        }
-//
-//        foreach ($dataSet as $data) {
-//            $count = 0;
-//            foreach ($data['products'] as $product) {
-//                $count += count($product['items']);
-//            }
-//            $dataSet[$data['vendor']->id]['vendor-count'] = $count == 0 ? 1 : $count;
-//        }
-//        dump($products);
-//        exit();
+        //        foreach ($items as $item) {
+        //            $product = Product::where('id', '=', $item->product_id)->first();
+        //
+        //            if (!isset($dataSet[$product->vendor_id])) {
+        //                $vendor = Vendor::where('id', '=', $product->vendor_id)->first();
+        //                $dataSet[$product->vendor_id]['vendor'] = $vendor;
+        //            }
+        //            $dataSet[$product->vendor_id]['products'][$item->product_id]['product'] = $product;
+        //
+        //
+        //            $dataSet[$product->vendor_id]['products'][$item->product_id]['items'][$item->id] = $item;
+        //        }
+        //
+        //        foreach ($dataSet as $data) {
+        //            $count = 0;
+        //            foreach ($data['products'] as $product) {
+        //                $count += count($product['items']);
+        //            }
+        //            $dataSet[$data['vendor']->id]['vendor-count'] = $count == 0 ? 1 : $count;
+        //        }
+        //        dump($products);
+        //        exit();
         return view('admin.view_products', [
-            'data' => $dataSet
+            'data' => $dataSet,
+            'total' => $total
         ]);
     }
 
@@ -80,8 +83,8 @@ class viewController extends Controller
             }
             $dataSet[$data['vendor']->id]['vendor-count'] = $count == 0 ? 1 : $count;
         }
-//        dump($dataSet);
-//        exit();
+        //        dump($dataSet);
+        //        exit();
         return view('admin.view', [
             'data' => $dataSet
         ]);
@@ -100,7 +103,8 @@ class viewController extends Controller
     }
 
 
-    public function stockouts(){
+    public function stockouts()
+    {
         $items = item::all();
         $dataSet = [];
         foreach ($items as $item) {
@@ -111,11 +115,10 @@ class viewController extends Controller
             $data->customerName = $item->customer_name;
             $data->stockOutDate = $item->stock_out_date;
             $data->salesPerson = $item->sales_person;
-           array_push($dataSet, $data);
+            array_push($dataSet, $data);
         }
         return view('admin.view_stockouts', [
             'data' => $dataSet
         ]);
     }
-
 }
