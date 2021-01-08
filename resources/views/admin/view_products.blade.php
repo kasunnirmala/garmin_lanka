@@ -11,7 +11,7 @@
 @endsection
 
 @section('sub-detail')
-    <h1>Total => <span style="font-weight: bolder; color: green">Rs: {{$total}}/=</span></h1>
+    <h1>Total => <span style="font-weight: bolder; color: green" id="total-price">{{$total}}</span></h1>
 @endsection
 
 
@@ -87,6 +87,7 @@
     <script>
         $(document).ready(function () {
             $('#allstock').DataTable();
+            $('#total-price').html(Number($('#total-price').html()).toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2}).replace("$","").trim())
         });
 $("#add-product-amount").on('show.bs.modal',function (event) {
 let product_id=$(event.relatedTarget).data('product-id');
