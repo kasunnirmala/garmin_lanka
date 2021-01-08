@@ -7,12 +7,9 @@
 
 
 @section('page-name')
-    All Stock
+    All Stock - <span style="font-weight: bolder; color: green" id="total-price">{{$total}}</span>
 @endsection
 
-@section('sub-detail')
-    <h1>Total => <span style="font-weight: bolder; color: green" id="total-price">{{$total}}</span></h1>
-@endsection
 
 
 @section('body-content')
