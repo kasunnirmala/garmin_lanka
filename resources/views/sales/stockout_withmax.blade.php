@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-4 col-sm-12">
                   <h2>Product Details</h2>
-                  <div>Product Code : {{$product->productCode}}</div>
+                  <div>Part Number : {{$product->productCode}}</div>
                   <div>Product Description : {{$product->productDsc}}</div>
               </div>
           </div>
@@ -154,7 +154,7 @@
 
         $("#item-summary").on('show.bs.modal', function (event) {
             $(this).find('.body-data').empty();
-            $(this).find('.body-data').append("<p>Customer :" + $('#customer option:selected').text() + "</p><p><u>Item Serial Codes</u></p>");
+            $(this).find('.body-data').append("<p>Customer :" + $('#customer option:selected').text() + "</p><p><u>Item Serial No's</u></p>");
 
             var itemList = [];
             rndList.forEach((rnd) => {
