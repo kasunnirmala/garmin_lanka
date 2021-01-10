@@ -7,7 +7,7 @@
 
 
 @section('page-name')
-    All Stock : <span style="font-weight: bolder; color: green; border: 1px rgb(148, 148, 148) solid; border-radius: 3px; padding:0px 8px" id="total-price" >{{$total}}</span>
+    All Stock : <span style="font-weight: 500; color: green; border: 1px rgb(148, 148, 148) solid; border-radius: 3px; padding:0px 8px" id="total-price" >{{$total}}</span>
 @endsection
 
 
