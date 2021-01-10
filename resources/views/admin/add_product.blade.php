@@ -111,7 +111,7 @@
             var item = '   <div class="row item-set">\n' +
                 '                <div class="col-lg-3 col-md-12">\n' +
                 '                    <div class="form-group">\n' +
-                '                        <input type="text" class="form-control" id="product_code_' + rnd + '" placeholder="Garmin Code">\n' +
+                '                        <input type="text" class="form-control" id="product_code_' + rnd + '" placeholder="Part Number">\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
                 '                <div class="col-lg-3 col-md-12">\n' +

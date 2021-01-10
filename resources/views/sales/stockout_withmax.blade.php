@@ -154,7 +154,7 @@
 
         $("#item-summary").on('show.bs.modal', function (event) {
             $(this).find('.body-data').empty();
-            $(this).find('.body-data').append("<p>Customer :" + $('#customer').text() + "</p><p><u>Item Serial Codes</u></p>");
+            $(this).find('.body-data').append("<p>Customer :" + $('#customer option:selected').text() + "</p><p><u>Item Serial Codes</u></p>");
 
             var itemList = [];
             rndList.forEach((rnd) => {

@@ -18,7 +18,7 @@
             <thead class="thead-dark">
                 <tr>
 
-                    <th scope="col">Garmin ID</th>
+                    <th scope="col">Part Number</th>
                     <th scope="col">Serial Number</th>
                     <th scope="col">Customer Name</th>
                     <th scope="col">Stock Out Date</th>
@@ -30,7 +30,7 @@
 
                 @foreach ($data as $item)
                     <tr>
-                       
+
                         <td>{{ $item->garminId }}</td>
                         <td>{{ $item->itemCode }}</td>
                         <td>{{ $item->customerName }}</td>

@@ -18,7 +18,7 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Vendor Name</th>
-                <th scope="col">Garmin ID</th>
+                <th scope="col">Part Number</th>
                 <th scope="col">Product Desc</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Actions</th>

@@ -7,7 +7,7 @@
 
 
 @section('page-name')
-    All Stock - <span style="font-weight: bolder; color: green" id="total-price">{{$total}}</span>
+    All Stock : <span style="font-weight: bolder; color: green; border: 1px rgb(148, 148, 148) solid; border-radius: 3px; padding:0px 8px" id="total-price" >{{$total}}</span>
 @endsection
 
 
@@ -19,7 +19,7 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Vendor Name</th>
-                <th scope="col">Garmin ID</th>
+                <th scope="col">Part Number</th>
                 <th scope="col">Product Desc</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Unit Price</th>

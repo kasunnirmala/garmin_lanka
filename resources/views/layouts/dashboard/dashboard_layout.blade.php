@@ -126,7 +126,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">@yield('page-name') </h1>
+                    <span style="font-weight: 800; color: black; text-transform: uppercase;letter-spacing: .05rem; font-size: 1.1rem;">@yield('page-name') </span>
                     @yield('sub-detail')
                 </div>
 
