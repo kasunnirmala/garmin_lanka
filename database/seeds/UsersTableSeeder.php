@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'email' => 'admin',
-            'password' => Hash::make('admin_123'),
+            'password' => Hash::make('GarminStock2021'),
             'role' => '1'
         ]);
         User::create([
