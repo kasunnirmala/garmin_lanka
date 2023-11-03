@@ -95,8 +95,8 @@
             if($('#product-amount')[0].checkValidity()){
                 var id = $("#product-id").val();
                 var amount = $("#product-amount").val();
-                // window.location.href = '/sales/out?id=' + id + '&amount=' + amount;
-                window.location.href = '/garmin/public/sales/out?id=' + id + '&amount=' + amount;
+                window.location.href = '/sales/out?id=' + id + '&amount=' + amount;
+                // window.location.href = '/garmin/public/sales/out?id=' + id + '&amount=' + amount;
             }else{
                 $.notify("Please Enter Valid Amount", "error");
             }
